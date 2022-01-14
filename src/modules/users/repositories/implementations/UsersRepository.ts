@@ -39,7 +39,9 @@ class UsersRepository implements IUsersRepository {
   }
 
   turnAdmin(receivedUser: User): User {
-    // Complete aqui
+    receivedUser.admin = true;
+    receivedUser.updated_at = new Date();
+    return receivedUser;
   }
 
   list(): User[] {
