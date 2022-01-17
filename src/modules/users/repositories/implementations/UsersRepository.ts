@@ -20,13 +20,13 @@ class UsersRepository implements IUsersRepository {
 
   create({ name, email }: ICreateUserDTO): User {
     const user = new User();
-    const isExistUserByEmail = this.findByEmail(email);
-    if (isExistUserByEmail) {
-      throw new Error("Mensagem do erro");
-    }
+
     Object.assign(user, {
       name,
       email,
+      created_at: new Date(),
+      updated_at: new Date(),
+      admin: false,
     });
     this.users.push(user);
 

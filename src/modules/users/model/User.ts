@@ -10,8 +10,8 @@ class User {
   constructor() {
     if (!this.id) {
       this.id = uuidV4();
-      this.created_at = new Date();
-      this.updated_at = null;
+    }
+    if (this.admin === undefined) {
       this.admin = false;
     }
   }
