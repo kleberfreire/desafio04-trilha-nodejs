@@ -20,11 +20,16 @@ class UsersRepository implements IUsersRepository {
 
   create({ name, email }: ICreateUserDTO): User {
     const user = new User();
+    const isExistUserByEmail = this.findByEmail(email);
+    if (isExistUserByEmail) {
+      throw new Error("Mensagem do erro");
+    }
     Object.assign(user, {
       name,
       email,
     });
     this.users.push(user);
+
     return user;
   }
 
@@ -34,14 +39,15 @@ class UsersRepository implements IUsersRepository {
   }
 
   findByEmail(email: string): User | undefined {
-    const userFindEmail = this.users.find((user) => user.email === email);
-    return userFindEmail;
+    const userFindBYEmail = this.users.find((user) => user.email === email);
+    return userFindBYEmail;
   }
 
   turnAdmin(receivedUser: User): User {
-    receivedUser.admin = true;
-    receivedUser.updated_at = new Date();
-    return receivedUser;
+    const user = receivedUser;
+    user.admin = true;
+    user.updated_at = new Date();
+    return user;
   }
 
   list(): User[] {

@@ -1,4 +1,4 @@
-import { v4 as uuidV4 } from 'uuid';
+import { v4 as uuidV4 } from "uuid";
 
 class User {
   id?: string;
@@ -8,12 +8,11 @@ class User {
   created_at: Date;
   updated_at: Date;
   constructor() {
-    if (this.admin === undefined) {
-      this.admin = false;
-    }
-
     if (!this.id) {
       this.id = uuidV4();
+      this.created_at = new Date();
+      this.updated_at = null;
+      this.admin = false;
     }
   }
 }
